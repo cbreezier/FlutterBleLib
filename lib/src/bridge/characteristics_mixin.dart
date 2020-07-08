@@ -248,7 +248,7 @@ mixin CharacteristicsMixin on FlutterBLE {
         .transform(CancelOnErrorStreamTransformer());
 
     StreamController<CharacteristicWithValue> streamController =
-        StreamController.broadcast(
+        StreamController(
       onListen: onListen,
       onCancel: () => cancelTransaction(transactionId),
     );
