@@ -9,6 +9,8 @@ mixin DevicesMixin on FlutterBLE {
     }).then((peripheralsJson) {
       debugPrint("known devices json: $peripheralsJson");
       return _parsePeripheralsJson(peripheralsJson);
+    }).onError<PlatformException>((errorJson, stackTrace) {
+      return Future.error(BleError.fromJson(jsonDecode(errorJson.details)), stackTrace);
     });
   }
 
@@ -19,6 +21,8 @@ mixin DevicesMixin on FlutterBLE {
     }).then((peripheralsJson) {
       debugPrint("connected devices json: $peripheralsJson");
       return _parsePeripheralsJson(peripheralsJson);
+    }).onError<PlatformException>((errorJson, stackTrace) {
+      return Future.error(BleError.fromJson(jsonDecode(errorJson.details)), stackTrace);
     });
   }
 
